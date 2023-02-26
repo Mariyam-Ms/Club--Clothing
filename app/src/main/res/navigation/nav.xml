@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav"
+    app:startDestination="@id/splashFragment">
+
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.project1.clubclothing.views.SplashFragment"
+        android:label="fragment_splash"
+        tools:layout="@layout/fragment_splash" >
+        <action
+            android:id="@+id/action_splashFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.project1.clubclothing.views.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+
+        <action
+            android:id="@+id/action_homeFragment_to_tabFragment"
+            app:destination="@id/tabFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_shoesFragment"
+            app:destination="@id/shoesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/clothingFragment"
+        android:name="com.project1.clubclothing.views.ClothingFragment"
+        android:label="fragment_clothing"
+        tools:layout="@layout/fragment_clothing" >
+        <action
+            android:id="@+id/action_clothingFragment_to_clothingCartFragment"
+            app:destination="@id/clothingCartFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/shoesFragment"
+        android:name="com.project1.clubclothing.views.ShoesFragment"
+        android:label="fragment_shoes"
+        tools:layout="@layout/fragment_shoes" >
+        <action
+            android:id="@+id/action_shoesFragment_to_shoeCartFragment"
+            app:destination="@id/shoeCartFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/tabFragment"
+        android:name="com.project1.clubclothing.views.TabFragment"
+        android:label="fragment_tab"
+        tools:layout="@layout/fragment_tab" >
+        <action
+            android:id="@+id/action_tabFragment_to_clothingFragment"
+            app:destination="@id/clothingFragment" />
+        <action
+            android:id="@+id/action_tabFragment_to_shoesFragment"
+            app:destination="@id/shoesFragment" />
+        <action
+            android:id="@+id/action_tabFragment_to_shoeCartFragment"
+            app:destination="@id/shoeCartFragment" />
+        <action
+            android:id="@+id/action_tabFragment_to_clothingCartFragment"
+            app:destination="@id/clothingCartFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/shoeCartFragment"
+        android:name="com.project1.clubclothing.views.ShoeCartFragment"
+        android:label="fragment_shoe_cart"
+        tools:layout="@layout/fragment_shoe_cart" >
+        <action
+            android:id="@+id/action_shoeCartFragment_to_shoesFragment"
+            app:destination="@id/shoesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/clothingCartFragment"
+        android:name="com.project1.clubclothing.views.ClothingCartFragment"
+        android:label="fragment_clothing_cart"
+        tools:layout="@layout/fragment_clothing_cart" >
+        <action
+            android:id="@+id/action_clothingCartFragment_to_clothingFragment"
+            app:destination="@id/clothingFragment" />
+    </fragment>
+
+
+</navigation>

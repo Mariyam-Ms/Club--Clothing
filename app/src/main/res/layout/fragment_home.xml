@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".views.HomeFragment">
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="6dp"
+        android:src="@drawable/clubwhite"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Club Clothing"
+        android:textColor="@color/black"
+        android:textSize="34sp"
+        android:textStyle="bold"
+       android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="28dp"
+        android:src="@drawable/addtobaghomeimg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.denzcoskun.imageslider.ImageSlider
+        android:id="@+id/imageSlider"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginBottom="220dp"
+        app:iss_auto_cycle="true"
+        app:iss_title_background="@drawable/gradient"
+        app:iss_delay="1000"
+        app:iss_period="1000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:iss_selected_dot="@drawable/default_selected_dot"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.104"
+        >
+
+    </com.denzcoskun.imageslider.ImageSlider>
+
+    <!--    <androidx.appcompat.widget.SwitchCompat-->
+    <!--        android:id="@+id/modeswitch"-->
+    <!--        android:layout_width="17dp"-->
+    <!--        android:layout_height="16dp"-->
+
+    <!--        android:drawableRight="@drawable/ic_baseline_dark_mode_24"-->
+    <!--        android:thumb="@drawable/ic_baseline_wb_sunny_24"-->
+
+    <!--        app:thumbTint="@color/white"-->
+    <!--        tools:layout_editor_absoluteX="387dp"-->
+    <!--        tools:layout_editor_absoluteY="43dp" />-->
+
+    <TextView
+        android:id="@+id/navigatetoclothtab"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/imageSlider"
+        android:text="                                                                  View Collection -->"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        />
+
+    <TextView
+        android:id="@+id/ShoeHeading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Shoes"
+        android:textSize="31dp"
+        android:layout_marginStart="3dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/navigatetoclothtab"/>
+    <TextView
+        android:id="@+id/navgatetoshoetab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="View all"
+        android:layout_marginTop="4dp"
+        android:textSize="18dp"
+        android:textColor="@color/purple_700"
+        android:textStyle="normal"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/navigatetoclothtab"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerviewHorizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+      android:layout_marginTop="3dp"
+
+        app:layout_constraintTop_toBottomOf="@+id/ShoeHeading"
+app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
