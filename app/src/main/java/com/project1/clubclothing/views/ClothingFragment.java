@@ -2,6 +2,7 @@ package com.project1.clubclothing.views;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,10 +76,16 @@ public class ClothingFragment extends Fragment implements ClothesItemAdapter.Jer
     @Override
     public void onResume() {
         super.onResume();
-        viewModel.getAllJerseyItems(getId()).observe(this, new Observer<List<DataItem>>() {
+        viewModel.getAllItems().observe(this, new Observer<List<DataItem>>() {
             @Override
             public void onChanged(List<DataItem> dataItems) {
-                clothItemList.addAll(dataItems);
+                for(int i=0;i<dataItems.size();i++){
+                    if(dataItems.get(i).getJerseyName()!=null){
+                        clothItemList.add(dataItems.get(i));
+                    }
+                }
+
+                Log.i("ITSCLOTHFRAGMENT", "onChanged: "+ clothItemList.size());
             }
         });
 
@@ -96,10 +103,10 @@ public class ClothingFragment extends Fragment implements ClothesItemAdapter.Jer
 
     private void setUpList() {
         clothesCartList.add(new ClothesCart("Messi","Psg",R.drawable.messi,3700));
-        clothesCartList.add(new ClothesCart("Gavi","Barca",R.drawable.gavi,3700));
-        clothesCartList.add(new ClothesCart("Griezman","Atletico",R.drawable.griezman,3700));
+        clothesCartList.add(new ClothesCart("Gavi","Barca",R.drawable.gavi,4700));
+        clothesCartList.add(new ClothesCart("Griezman","Atletico",R.drawable.griezman,81));
 
-        clothesCartList.add(new ClothesCart("Ering Haaland","mancity",R.drawable.eringhaaland,3700));
+        clothesCartList.add(new ClothesCart("Ering Haaland","mancity",R.drawable.eringhaaland,2800));
         clothesCartList.add(new ClothesCart("Erisken","Manchester United",R.drawable.eriksen,3700));
         clothesCartList.add(new ClothesCart("Dybla","Madrid",R.drawable.dybla,3700));
         clothesCartList.add(new ClothesCart("Debrunye","mancity",R.drawable.debrunye,3700));
@@ -120,26 +127,38 @@ public class ClothingFragment extends Fragment implements ClothesItemAdapter.Jer
         dataItem.setJerseyImage(clothescart.getJerseyImage());
 
         final int[] jerseyquantity = {1};
-        final int[] jerseyid = new int[1];
+        final int[] id = new int[1];
+
+      //  Log.i("ITSCLOTHFRAGMENT", "onAddtoJerseyCartBtnClicked:  outside"  + clothItemList.size());
 
         if (!clothItemList.isEmpty()) {
             for (int i = 0; i < clothItemList.size(); i++) {
+              //  Log.i("ITSCLOTHFRAGMENT", "onAddtoJerseyCartBtnClicked: "+clothItemList.size());
                 if (dataItem.getJerseyName().equals(clothItemList.get(i).getJerseyName())) {
+                   // Log.i("ITSCLOTHFRAGMENT", "onAddtoJerseyCartBtnClicked: "+clothItemList.get(i).getJerseyName());
+
                     jerseyquantity[0] = clothItemList.get(i).getJerseyquantity();
                     jerseyquantity[0]++;
-                   jerseyid [0] = clothItemList.get(i).getJerseyid();
+                   id [0] = clothItemList.get(i).getId();
                 }
             }
 
         }
 
         if (jerseyquantity[0] == 1) {
+          //  Log.i("ITSCLOTHFRAGMENT", "onAddtoJerseyCartBtnClicked:  okay "+jerseyquantity[0]);
+
             dataItem.setJerseyquantity(jerseyquantity[0]);
             dataItem.setTotalJerseyPrice(jerseyquantity[0] * dataItem.getJerseyPrice());
-            viewModel.insertJerseyItem(dataItem);
+            viewModel.insertJerseyItem(dataItem,id);
         } else {
-            viewModel.updateJerseyQuantity(dataItem.getJerseyid(), dataItem.getJerseyquantity());
-            viewModel.updateJerseyPrice(dataItem.getJerseyid(), jerseyquantity[0] * dataItem.getJerseyPrice());
+            //Log.i("ITSCLOTHFRAGMENT", "onAddtoJerseyCartBtnClicked: Nope " + dataItem.getId());
+
+            viewModel.updateJerseyQuantity(id[0], jerseyquantity[0]);
+            viewModel.updateJerseyPrice(id[0], jerseyquantity[0] * dataItem.getJerseyPrice());
+        }
+
+
 
             View view = getView();
             if (view != null) {
@@ -156,7 +175,7 @@ public class ClothingFragment extends Fragment implements ClothesItemAdapter.Jer
                         .setActionTextColor(Color.BLUE)
                         .show();
             }
-        }
+
     }
 }
 

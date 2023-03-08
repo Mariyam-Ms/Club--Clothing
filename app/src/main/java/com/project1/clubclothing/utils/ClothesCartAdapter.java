@@ -19,14 +19,15 @@ public class ClothesCartAdapter extends RecyclerView.Adapter<ClothesCartAdapter.
     private JerseyClickedListeners jerseyClickedListeners;
     private List<DataItem> dataItemList;
 
-
-    public void setDataItemList(List<DataItem> dataItemList) {
-        this.dataItemList = dataItemList;
-    }
-
     public ClothesCartAdapter(JerseyClickedListeners jerseyClickedListeners) {
         this.jerseyClickedListeners = jerseyClickedListeners;
     }
+    public void setDataItemList(List<DataItem> dataItemList) {
+        this.dataItemList = dataItemList;
+        notifyDataSetChanged();
+    }
+
+
 
     @NonNull
     @Override

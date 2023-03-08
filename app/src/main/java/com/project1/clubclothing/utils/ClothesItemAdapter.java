@@ -48,6 +48,7 @@ public class ClothesItemAdapter extends RecyclerView.Adapter<ClothesItemAdapter.
         holder.addTojsyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 jerseyItemClickedListeners. onAddtoJerseyCartBtnClicked(clothescart) ;
 
             }

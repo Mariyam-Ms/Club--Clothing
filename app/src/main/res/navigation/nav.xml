@@ -65,6 +65,10 @@
         <action
             android:id="@+id/action_tabFragment_to_clothingCartFragment"
             app:destination="@id/clothingCartFragment" />
+        <argument
+            android:name="isShoeCollection"
+            app:argType="boolean"
+            android:defaultValue="false" />
     </fragment>
     <fragment
         android:id="@+id/shoeCartFragment"

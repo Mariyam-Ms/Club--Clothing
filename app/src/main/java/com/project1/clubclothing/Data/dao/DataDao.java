@@ -25,18 +25,18 @@ public interface DataDao {
     @Delete
     void deleteJerseyItem(DataItem dataItem);
 
-    @Query("SELECT * FROM fashion_table  WHERE id=:id")
-    LiveData<List<DataItem>> getAllShoeItems(int id);
-
-    @Query("SELECT * FROM fashion_table WHERE jerseyid=:jerseyid")
-    LiveData<List<DataItem>> getAllJerseyItems(int jerseyid);
+    @Query("SELECT * FROM fashion_table  ")
+    LiveData<List<DataItem>> getAllItems();
 
 
-    @Query("DELETE  FROM fashion_table WHERE id=:id")
-    void deleteAllShoeItems(int id);
 
-    @Query("DELETE FROM fashion_table WHERE jerseyid=:jerseyid")
-    void deleteAllJerseyItems(int jerseyid);
+
+    @Query("DELETE  FROM fashion_table ")
+    void deleteAllShoeItems();
+
+    @Query("DELETE FROM fashion_table ")
+    void deleteAllJerseyItems();
+
 
 
 
@@ -47,11 +47,11 @@ public interface DataDao {
     void updateShoePrice(int id , double totalShoesPrice);
 
 
-    @Query("UPDATE fashion_table SET jerseyquantity=:jerseyquantity WHERE jerseyid=:jerseyid")
-    void updateJerseyQuantity(int jerseyid , int jerseyquantity);
+    @Query("UPDATE fashion_table SET jerseyquantity=:jerseyquantity WHERE id=:id")
+    void updateJerseyQuantity(int id , int jerseyquantity);
 
-    @Query("UPDATE fashion_table SET totalJerseyPrice=:totalJerseyPrice WHERE jerseyid=:jerseyid")
-    void updateJerseyPrice(int jerseyid , double totalJerseyPrice);
+    @Query("UPDATE fashion_table SET totalJerseyPrice=:totalJerseyPrice WHERE id=:id")
+    void updateJerseyPrice(int id , double totalJerseyPrice);
 
 
 

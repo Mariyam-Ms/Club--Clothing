@@ -77,10 +77,16 @@ public class ShoesFragment extends Fragment implements ShoeItemAdapter.ShoeClick
     @Override
     public void onResume() {
         super.onResume();
-      viewModel.getAllShoeItems(getId()).observe(this, new Observer<List<DataItem>>() {
+      viewModel.getAllItems().observe(this, new Observer<List<DataItem>>() {
         @Override
         public void onChanged(List<DataItem> dataItems) {
-            shoeItemList.addAll(dataItems);
+
+            for(int i=0;i<dataItems.size();i++){
+                if(dataItems.get(i).getShoeName()!=null){
+                    shoeItemList.add(dataItems.get(i));
+                }
+            }
+           // shoeItemList.addAll(dataItems);
         }
     });
 
@@ -98,18 +104,18 @@ public class ShoesFragment extends Fragment implements ShoeItemAdapter.ShoeClick
     private void setUpList() {
         shoeCartList.add(new Shoecart("Nike Blue","Nike",R.drawable.wonderwoman,370));
         shoeCartList.add(new Shoecart("BatMan ","Nike",R.drawable.batman,190));
-        shoeCartList.add(new Shoecart("Nike Blue","Nike",R.drawable.nikea,380));
-        shoeCartList.add(new Shoecart("Nike Blue","Nike",R.drawable.nikepink,260));
-        shoeCartList.add(new Shoecart("Nike Blue","Nike",R.drawable.nikebrown,3960));
-        shoeCartList.add(new Shoecart("Nike Blue","Nike",R.drawable.greenlanther,170));
-        shoeCartList.add(new Shoecart("Nike Blue","Nike",R.drawable.nikeorange,200));
-        shoeCartList.add(new Shoecart("Nike Blue","Nike",R.drawable.nikeracing,220));
-        shoeCartList.add(new Shoecart("Nike Blue","Nike",R.drawable.nikepurple,300));
-        shoeCartList.add(new Shoecart("Nike Blue","Nike",R.drawable.aquaman,400));
-        shoeCartList.add(new Shoecart("Nike Blue","Nike",R.drawable.superman,370));
-        shoeCartList.add(new Shoecart("Nike Blue","Nike",R.drawable.harleyquinn,350));
-        shoeCartList.add(new Shoecart("Nike Blue","Nike",R.drawable.mrfreeze,290));
-        shoeCartList.add(new Shoecart("Nike Blue","Nike",R.drawable.nikeair,69));
+        shoeCartList.add(new Shoecart("Nike Air","Nike",R.drawable.nikea,380));
+        shoeCartList.add(new Shoecart("Nike Pink","Nike",R.drawable.nikepink,260));
+        shoeCartList.add(new Shoecart("Nike Solid Brown","Nike",R.drawable.nikebrown,3960));
+        shoeCartList.add(new Shoecart("Nike Green Lanther","Nike",R.drawable.greenlanther,170));
+        shoeCartList.add(new Shoecart("Nike pop","Nike",R.drawable.nikeorange,200));
+        shoeCartList.add(new Shoecart("Nike Acing","Nike",R.drawable.nikeracing,220));
+        shoeCartList.add(new Shoecart("Nike Purple","Nike",R.drawable.nikepurple,300));
+        shoeCartList.add(new Shoecart("Nike AguaMan","Nike",R.drawable.aquaman,400));
+        shoeCartList.add(new Shoecart("Nike Superman","Nike",R.drawable.superman,370));
+        shoeCartList.add(new Shoecart("Nike Harleyquinn","Nike",R.drawable.harleyquinn,350));
+        shoeCartList.add(new Shoecart("Nike MrFreeze","Nike",R.drawable.mrfreeze,290));
+        shoeCartList.add(new Shoecart("Nike Airr","Nike",R.drawable.nikeair,69));
     }
 
 

@@ -25,14 +25,13 @@ import java.util.List;
 
 public class HomeFragment extends Fragment {
 
-private FragmentHomeBinding binding;
- NavController navController;
+    NavController navController;
+    private FragmentHomeBinding binding;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        binding= FragmentHomeBinding.inflate(inflater,container,false);
+        binding = FragmentHomeBinding.inflate(inflater, container, false);
         return binding.getRoot();
 
 
@@ -56,12 +55,14 @@ private FragmentHomeBinding binding;
         binding.navigatetoclothtab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                navController.navigate(R.id.action_homeFragment_to_tabFragment);
+
+               HomeFragmentDirections.ActionHomeFragmentToTabFragment action = HomeFragmentDirections.actionHomeFragmentToTabFragment();
+               action.setIsShoeCollection(false);
+                navController.navigate(action);
             }
         });
         binding.recyclerviewHorizontal.setHasFixedSize(true);
-        binding.recyclerviewHorizontal.setLayoutManager(new LinearLayoutManager(getContext(),
-                LinearLayoutManager.HORIZONTAL,false));
+        binding.recyclerviewHorizontal.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         List<Integer> imageList = new ArrayList<>();
 
         imageList.add(R.drawable.shoe1);
@@ -81,7 +82,9 @@ private FragmentHomeBinding binding;
         binding.navgatetoshoetab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                navController.navigate(R.id.action_homeFragment_to_tabFragment);
+                HomeFragmentDirections.ActionHomeFragmentToTabFragment action= HomeFragmentDirections.actionHomeFragmentToTabFragment();
+                action.setIsShoeCollection(true);
+                navController.navigate(action);
             }
         });
 

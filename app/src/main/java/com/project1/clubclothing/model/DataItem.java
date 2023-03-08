@@ -126,12 +126,11 @@ public class DataItem {
     }
 
 
-    public DataItem(String jerseyName, String jerseyClubName, int jerseyImage, double jerseyPrice, int jerseyid, int jerseyquantity, double totalJerseyPrice) {
+    public DataItem(String jerseyName, String jerseyClubName, int jerseyImage, double jerseyPrice,  int jerseyquantity, double totalJerseyPrice) {
         this.jerseyName = jerseyName;
         this.jerseyClubName = jerseyClubName;
         this.jerseyImage = jerseyImage;
         this.jerseyPrice = jerseyPrice;
-        this.jerseyid = jerseyid;
         this.jerseyquantity = jerseyquantity;
         this.totalJerseyPrice = totalJerseyPrice;
     }
@@ -154,15 +153,8 @@ public class DataItem {
         this.id = id;
     }
 
-    private int jerseyid;
 
-    public int getJerseyid() {
-        return jerseyid;
-    }
 
-    public void setJerseyid(int jerseyid) {
-        this.jerseyid = jerseyid;
-    }
 
     private int jerseyquantity;
     private double totalJerseyPrice;

@@ -16,47 +16,45 @@ public class MyViewModel extends AndroidViewModel {
     private Repoo repoo;
 
 
+//    public MyViewModel(@NonNull Application application) {
+//        super(application);
+//        repoo=new Repoo(application,1,1);
+//    }
+
     public MyViewModel(@NonNull Application application) {
         super(application);
-        repoo=new Repoo(application,1,1);
-    }
-
-    public MyViewModel(@NonNull Application application, int id, int jerseyid) {
-        super(application);
-        this.repoo = new Repoo(application, id, jerseyid);
+        this.repoo = new Repoo(application);
     }
 
 
 
 
-    public LiveData<List<DataItem>> getAllShoeItems(int id) {
-        return repoo.getAllShoeItemsLiveData(id);
+    public LiveData<List<DataItem>> getAllItems() {
+        return repoo.getAllItemsLiveData();
     }
-    public void insertJerseyItem(DataItem dataItem) {
+    public void insertJerseyItem(DataItem dataItem ,int[] id) {
         repoo.insertJerseyItem(dataItem);
     }
 
 
 
-    public LiveData<List<DataItem>> getAllJerseyItems(int jerseyid) {
-        return repoo.getAllCartJerseyItemsLiveData(jerseyid);
+
+
+
+    public void updateJerseyQuantity(int id, int jerseyquantity) {
+        repoo.updateJerseyQuantity(id, jerseyquantity);
     }
 
-
-    public void updateJerseyQuantity(int jerseyid, int jerseyquantity) {
-        repoo.updateJerseyQuantity(jerseyid, jerseyquantity);
-    }
-
-    public void updateJerseyPrice(int jerseyid, double totalJerseyprice) {
-        repoo.updateJerseyPrice(jerseyid, totalJerseyprice);
+    public void updateJerseyPrice(int id, double totalJerseyprice) {
+        repoo.updateJerseyPrice(id, totalJerseyprice);
     }
 
     public void deleteJerseyItem(DataItem dataItem) {
         repoo.deleteJerseyItem(dataItem);
     }
 
-    public void deleteAllJerseyItems(int jerseyid) {
-        repoo.deleteAllJerseyItems(jerseyid);
+    public void deleteAllJerseyItems() {
+        repoo.deleteAllJerseyItems();
     }
 
     public void insertShoeItem(DataItem dataItem,int[] id) {
@@ -75,8 +73,8 @@ public class MyViewModel extends AndroidViewModel {
         repoo.deleteShoeItem(dataItem);
     }
 
-    public void deleteAllShoeItems(int id) {
-        repoo.deleteAllShoeItems(id);
+    public void deleteAllShoeItems() {
+        repoo.deleteAllShoeItems();
     }
 
 

@@ -15,19 +15,17 @@ import java.util.concurrent.Executors;
 public class Repoo {
 
     private DataDao dataDao;
-    private LiveData<List<DataItem>> allCartShoeItemsLiveData,allCartJerseyItemsLiveData;
+    private LiveData<List<DataItem>> allCartItemsLiveData;
     private Executor executor = Executors.newSingleThreadExecutor();
 
-    public LiveData<List<DataItem>> getAllShoeItemsLiveData( int id) {
-        return allCartShoeItemsLiveData;
+    public LiveData<List<DataItem>> getAllItemsLiveData() {
+        return allCartItemsLiveData;
     }
-    public LiveData<List<DataItem>> getAllCartJerseyItemsLiveData(int jerseyid){
-        return allCartJerseyItemsLiveData;
-    }
-    public Repoo(Application application, int id, int jerseyid){
+
+    public Repoo(Application application){
         dataDao = ItemDatabase.getInstance(application).dataDao();
-        allCartShoeItemsLiveData = dataDao.getAllShoeItems(id);
-        allCartJerseyItemsLiveData = dataDao.getAllJerseyItems(jerseyid);
+        allCartItemsLiveData = dataDao.getAllItems();
+
     }
     public void insertShoeItem(DataItem dataItem){
         executor.execute(new Runnable() {
@@ -70,11 +68,11 @@ public class Repoo {
             }
         });
     }
-    public void updateJerseyQuantity(int jerseyid , int jerseyquantity) {
+    public void updateJerseyQuantity(int id , int jerseyquantity) {
         executor.execute(new Runnable() {
             @Override
             public void run() {
-                dataDao.updateJerseyQuantity(jerseyid, jerseyquantity);
+                dataDao.updateJerseyQuantity(id, jerseyquantity);
             }
         });
     }
@@ -87,28 +85,28 @@ public class Repoo {
             }
         });
     }
-    public void updateJerseyPrice(int jerseyid , double totalJerseyprice){
+    public void updateJerseyPrice(int id , double totalJerseyprice){
         executor.execute(new Runnable() {
             @Override
             public void run() {
-                dataDao.updateJerseyPrice(jerseyid , totalJerseyprice);
+                dataDao.updateJerseyPrice(id , totalJerseyprice);
             }
         });
     }
 
-    public void deleteAllShoeItems(int id){
+    public void deleteAllShoeItems(){
         executor.execute(new Runnable() {
             @Override
             public void run() {
-                dataDao.deleteAllShoeItems(id);
+                dataDao.deleteAllShoeItems();
             }
         });
     }
-    public void deleteAllJerseyItems(int jerseyid){
+    public void deleteAllJerseyItems(){
         executor.execute(new Runnable() {
             @Override
             public void run() {
-                dataDao.deleteAllJerseyItems(jerseyid);
+                dataDao.deleteAllJerseyItems();
             }
         });
     }

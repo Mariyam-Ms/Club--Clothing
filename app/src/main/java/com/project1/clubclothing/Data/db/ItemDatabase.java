@@ -10,7 +10,7 @@ import com.project1.clubclothing.Data.dao.DataDao;
 import com.project1.clubclothing.model.DataItem;
 
 
-@Database(entities = DataItem.class,version = 1)
+@Database(entities = DataItem.class,version = 2)
 public abstract class ItemDatabase extends RoomDatabase {
 
     public static ItemDatabase instance;

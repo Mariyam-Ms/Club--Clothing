@@ -21,6 +21,7 @@ public class TabFragment extends Fragment {
 
    private FragmentTabBinding binding;
    NavController navController;
+   private Boolean isShoeCollection=false;
 
 
     @Override
@@ -37,6 +38,7 @@ public class TabFragment extends Fragment {
 
 
         navController= Navigation.findNavController(view);
+        isShoeCollection=TabFragmentArgs.fromBundle(getArguments()).getIsShoeCollection();
 
         TabLayout tabLayout=binding.tablayoutid;
         ViewPager viewPager=binding.viewPager;
@@ -49,6 +51,14 @@ public class TabFragment extends Fragment {
 
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
+
+        if(isShoeCollection){
+            tabLayout.getTabAt(1).select();
+
+        }else{
+            tabLayout.getTabAt(0).select();
+
+        }
 
     }
 }

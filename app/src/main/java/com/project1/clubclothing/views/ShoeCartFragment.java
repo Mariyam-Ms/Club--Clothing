@@ -53,23 +53,30 @@ public class ShoeCartFragment extends Fragment implements ShoeCartAdapter.CartCl
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        navController= Navigation.findNavController(view);
+        navController = Navigation.findNavController(view);
         initializeVariables();
 
         ShoeCartAdapter adapter = new ShoeCartAdapter(this);
         binding.cartRecyclerView.setAdapter(adapter);
-          adapter.setShoeCartList(shoeItemList);
+        adapter.setShoeCartList(shoeItemList);
         binding.cartRecyclerView.setHasFixedSize(true);
         binding.cartRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
 
-        viewModel.getAllShoeItems(getId()).observe(getViewLifecycleOwner(), new Observer<List<DataItem>>() {
+
+    viewModel.getAllItems().observe(getViewLifecycleOwner(), new Observer<List<DataItem>>() {
             @Override
             public void onChanged(List<DataItem> dataItems) {
+
+
                 double price = 0;
                 adapter.setShoeCartList(dataItems);
                 for (int i=0;i<dataItems.size();i++){
-                    price = price + dataItems.get(i).getTotalShoesPrice();
+                    if(dataItems.get(i).getShoeName()!=null) {
+                        shoeItemList.add(dataItems.get(i));
+
+                        price = price + dataItems.get(i).getTotalShoesPrice();
+                    }
                 }
                 binding.shoecartTotalPriceTv .setText(String.valueOf(price));
             }
@@ -77,7 +84,7 @@ public class ShoeCartFragment extends Fragment implements ShoeCartAdapter.CartCl
         binding.shoeCheckoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                viewModel.deleteAllShoeItems(getId());
+                viewModel.deleteAllShoeItems();
             }
         });
     }
