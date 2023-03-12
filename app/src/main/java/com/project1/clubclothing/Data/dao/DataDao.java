@@ -38,7 +38,8 @@ public interface DataDao {
     void deleteAllJerseyItems();
 
 
-
+    @Query("DELETE FROM fashion_table WHERE id = :id")
+    void deleteById(int id);
 
     @Query("UPDATE fashion_table SET shoequantity=:shoequantity WHERE id=:id")
     void updateShoeQuantity(int id , int shoequantity);

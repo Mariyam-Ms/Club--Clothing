@@ -27,6 +27,14 @@ public class Repoo {
         allCartItemsLiveData = dataDao.getAllItems();
 
     }
+    public  void deleteById(int id){
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                dataDao.deleteById(id);
+            }
+        });
+    }
     public void insertShoeItem(DataItem dataItem){
         executor.execute(new Runnable() {
             @Override

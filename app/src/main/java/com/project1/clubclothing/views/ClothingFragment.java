@@ -79,6 +79,7 @@ public class ClothingFragment extends Fragment implements ClothesItemAdapter.Jer
         viewModel.getAllItems().observe(this, new Observer<List<DataItem>>() {
             @Override
             public void onChanged(List<DataItem> dataItems) {
+
                 for(int i=0;i<dataItems.size();i++){
                     if(dataItems.get(i).getJerseyName()!=null){
                         clothItemList.add(dataItems.get(i));

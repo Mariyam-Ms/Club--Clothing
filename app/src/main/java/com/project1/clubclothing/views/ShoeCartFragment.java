@@ -1,6 +1,7 @@
 package com.project1.clubclothing.views;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +17,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.project1.clubclothing.databinding.FragmentShoeCartBinding;
 import com.project1.clubclothing.model.DataItem;
-import com.project1.clubclothing.model.Shoecart;
 import com.project1.clubclothing.utils.ShoeCartAdapter;
 import com.project1.clubclothing.viewmodel.MyViewModel;
 
@@ -30,7 +30,7 @@ public class ShoeCartFragment extends Fragment implements ShoeCartAdapter.CartCl
     private ShoeCartAdapter adapter;
     private MyViewModel viewModel;
     private List<DataItem> shoeItemList;
-    private List<Shoecart> shoeCartList;
+    private List<DataItem> allItemList;
 
 
     @Override
@@ -58,7 +58,6 @@ public class ShoeCartFragment extends Fragment implements ShoeCartAdapter.CartCl
 
         ShoeCartAdapter adapter = new ShoeCartAdapter(this);
         binding.cartRecyclerView.setAdapter(adapter);
-        adapter.setShoeCartList(shoeItemList);
         binding.cartRecyclerView.setHasFixedSize(true);
         binding.cartRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -68,23 +67,33 @@ public class ShoeCartFragment extends Fragment implements ShoeCartAdapter.CartCl
             @Override
             public void onChanged(List<DataItem> dataItems) {
 
+                allItemList.addAll(dataItems);
 
                 double price = 0;
-                adapter.setShoeCartList(dataItems);
+                shoeItemList.clear();
                 for (int i=0;i<dataItems.size();i++){
                     if(dataItems.get(i).getShoeName()!=null) {
                         shoeItemList.add(dataItems.get(i));
-
+                        Log.i("AREYOUCOMING", "onChanged: " + dataItems.size());
                         price = price + dataItems.get(i).getTotalShoesPrice();
                     }
                 }
+                adapter.setShoeCartList(shoeItemList);
+                adapter.notifyDataSetChanged();
+
                 binding.shoecartTotalPriceTv .setText(String.valueOf(price));
             }
         });
         binding.shoeCheckoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                viewModel.deleteAllShoeItems();
+
+                for(int i=0;i<allItemList.size();i++){
+                    if(allItemList.get(i).getShoeName()!=null){
+                        viewModel.deleteById(allItemList.get(i).getId());
+                    }
+                }
+
             }
         });
     }
@@ -93,7 +102,7 @@ public class ShoeCartFragment extends Fragment implements ShoeCartAdapter.CartCl
 
     private void initializeVariables() {
         viewModel = new ViewModelProvider(this).get(MyViewModel.class);
-        shoeCartList = new ArrayList<>();
+        allItemList = new ArrayList<>();
         shoeItemList = new ArrayList<>();
     }
 

@@ -22,12 +22,10 @@ public class ClothesCartAdapter extends RecyclerView.Adapter<ClothesCartAdapter.
     public ClothesCartAdapter(JerseyClickedListeners jerseyClickedListeners) {
         this.jerseyClickedListeners = jerseyClickedListeners;
     }
-    public void setDataItemList(List<DataItem> dataItemList) {
+
+    public void setClothesCartList(List<DataItem> dataItemList) {
         this.dataItemList = dataItemList;
-        notifyDataSetChanged();
     }
-
-
 
     @NonNull
     @Override
@@ -40,11 +38,11 @@ public class ClothesCartAdapter extends RecyclerView.Adapter<ClothesCartAdapter.
     public void onBindViewHolder(@NonNull ClothCartViewHolder holder, int position) {
 
         DataItem dataItem= dataItemList.get(position);
-        holder.jerseyImageView.setImageResource(dataItem.getShoeImage());
-        holder.jerseyNameTv.setText(dataItem.getShoeName());
-        holder.jerseyclubNameTv.setText(dataItem.getShoeBrandName());
-        holder.jerseyQuantity.setText(dataItem.getShoequantity() + "");
-        holder.jerseyPriceTv.setText(dataItem.getTotalShoesPrice() + "");
+        holder.jerseyImageView.setImageResource(dataItem.getJerseyImage());
+        holder.jerseyNameTv.setText(dataItem.getJerseyName());
+        holder.jerseyclubNameTv.setText(dataItem.getJerseyClubName());
+        holder.jerseyQuantity.setText(dataItem.getJerseyquantity() + "");
+        holder.jerseyPriceTv.setText(dataItem.getTotalJerseyPrice() + "");
 
 
         holder.deletejerseyBtn.setOnClickListener(new View.OnClickListener() {
@@ -59,6 +57,8 @@ public class ClothesCartAdapter extends RecyclerView.Adapter<ClothesCartAdapter.
             @Override
             public void onClick(View view) {
                 jerseyClickedListeners.onPlusJerseyClicked(dataItem);
+                notifyDataSetChanged();
+
             }
         });
 
@@ -66,6 +66,7 @@ public class ClothesCartAdapter extends RecyclerView.Adapter<ClothesCartAdapter.
             @Override
             public void onClick(View view) {
                 jerseyClickedListeners.onMinusJerseyClicked(dataItem);
+                notifyDataSetChanged();
             }
         });
 

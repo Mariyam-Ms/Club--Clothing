@@ -1,6 +1,7 @@
 package com.project1.clubclothing.views;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +16,6 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.project1.clubclothing.databinding.FragmentClothingCartBinding;
-import com.project1.clubclothing.model.ClothesCart;
 import com.project1.clubclothing.model.DataItem;
 import com.project1.clubclothing.utils.ClothesCartAdapter;
 import com.project1.clubclothing.viewmodel.MyViewModel;
@@ -31,7 +31,7 @@ public class ClothingCartFragment extends Fragment implements ClothesCartAdapter
     private ClothesCartAdapter adapter;
     private MyViewModel viewModel;
     private List<DataItem> clothItemList;
-    private List<ClothesCart> clothCartList;
+    private List<DataItem> allItemList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -57,7 +57,6 @@ public class ClothingCartFragment extends Fragment implements ClothesCartAdapter
         ClothesCartAdapter adapter=new ClothesCartAdapter(this);
         initializeVariables();
         binding.jerseycartRecyclerView.setAdapter(adapter);
-        adapter.setDataItemList(clothItemList);
         binding.jerseycartRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
 
@@ -67,35 +66,52 @@ public class ClothingCartFragment extends Fragment implements ClothesCartAdapter
             @Override
             public void onChanged(List<DataItem> dataItems) {
 //                for(int i=0;i<dataItems.size();i++){
-//                 //   Log.i("Data of T shirt cart", "onChanged: " + dataItems);
+                //   Log.i("DATAOFF", "onChanged: " + dataItems);
 //                    if(dataItems.get(i).getJerseyName()!=null){
 //                        clothItemList.add(dataItems.get(i));
 //                    }
 //                }
+                    allItemList.addAll(dataItems);
+
                 double price = 0;
-                adapter.setDataItemList(dataItems);
+                clothItemList.clear();
                 for (int i=0;i<dataItems.size();i++){
-                    if(dataItems.get(i).getShoeName()!=null) {
+                    if(dataItems.get(i).getJerseyName()!=null) {
+
+
+
                         clothItemList.add(dataItems.get(i));
+
                         price = price + dataItems.get(i).getTotalJerseyPrice();
 
                     }
                 }
+                Log.i("AREYOU", "onChanged: dataItems" + dataItems.size());
+                Log.i("AREYOU", "onChanged: clothingList " + clothItemList.size());
+
+                adapter.setClothesCartList(clothItemList);
+                adapter.notifyDataSetChanged();
                 binding.jerseycartTotalPriceTv .setText(String.valueOf(price));
             }
         });
         binding.jerseyCheckoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                viewModel.deleteAllJerseyItems();
+                for(int i=0;i<allItemList.size();i++){
+                    if(allItemList.get(i).getJerseyName()!=null){
+                        viewModel.deleteById(allItemList.get(i).getId());
+                    }
+                }
             }
         });
     }
 
+//    private void remove() {
+//    }
+
     private void initializeVariables() {
 
-        clothCartList    = new ArrayList<>();
+        allItemList   = new ArrayList<>();
         clothItemList = new ArrayList<>();
         viewModel = new ViewModelProvider(this).get(MyViewModel.class);
 
@@ -113,7 +129,7 @@ public class ClothingCartFragment extends Fragment implements ClothesCartAdapter
 
         int quantity = dataItem.getJerseyquantity() + 1;
         viewModel.updateJerseyQuantity(dataItem.getId() , quantity);
-        viewModel.updateShoePrice(dataItem.getId() , quantity*dataItem.getJerseyPrice());
+        viewModel.updateJerseyPrice(dataItem.getId() , quantity*dataItem.getJerseyPrice());
 
     }
 
@@ -124,7 +140,6 @@ public class ClothingCartFragment extends Fragment implements ClothesCartAdapter
         if (quantity != 0){
             viewModel.updateJerseyQuantity(dataItem.getId() , quantity);
             viewModel.updateJerseyPrice(dataItem.getId() , quantity*dataItem.getJerseyPrice());
-            adapter.notifyDataSetChanged();
         }else{
             viewModel.deleteJerseyItem(dataItem);
         }

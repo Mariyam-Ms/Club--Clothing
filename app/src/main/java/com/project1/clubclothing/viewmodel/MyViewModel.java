@@ -32,7 +32,7 @@ public class MyViewModel extends AndroidViewModel {
     public LiveData<List<DataItem>> getAllItems() {
         return repoo.getAllItemsLiveData();
     }
-    public void insertJerseyItem(DataItem dataItem ,int[] id) {
+    public void insertJerseyItem(DataItem dataItem ,int[] jid) {
         repoo.insertJerseyItem(dataItem);
     }
 
@@ -53,6 +53,9 @@ public class MyViewModel extends AndroidViewModel {
         repoo.deleteJerseyItem(dataItem);
     }
 
+    public void deleteById(int id){
+        repoo.deleteById(id);
+    }
     public void deleteAllJerseyItems() {
         repoo.deleteAllJerseyItems();
     }

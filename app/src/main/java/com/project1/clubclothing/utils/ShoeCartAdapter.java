@@ -26,7 +26,6 @@ public class ShoeCartAdapter extends RecyclerView.Adapter<ShoeCartAdapter.CartVi
 
     public void setShoeCartList(List<DataItem> dataItemList) {
         this.dataItemList = dataItemList;
-        notifyDataSetChanged();
     }
 
     @NonNull
